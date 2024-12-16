@@ -1,6 +1,6 @@
 # Useful Bash Scripts Collection
 
-A collection of everyday bash scripts for Unix-based systems (MacOS and Arch Linux).
+A comprehensive collection of useful bash scripts designed to automate common system administration tasks and enhance productivity on Unix-based systems (MacOS and Linux). Each script is carefully crafted to be cross-platform compatible and includes detailed documentation for ease of use.
 
 ## Installation
 
