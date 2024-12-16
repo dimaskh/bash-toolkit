@@ -1,6 +1,6 @@
 # Useful Bash Scripts Collection
 
-A comprehensive collection of useful bash scripts designed to automate common system administration tasks and enhance productivity on Unix-based systems (MacOS and Linux). Each script is carefully crafted to be cross-platform compatible and includes detailed documentation for ease of use. Test change.
+A comprehensive collection of useful bash scripts designed to automate common system administration tasks and enhance productivity on Unix-based systems (MacOS and Linux). Each script is carefully crafted to be cross-platform compatible and includes detailed documentation for ease of use.
 
 ## Installation
 
