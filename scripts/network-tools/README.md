@@ -470,3 +470,262 @@ Run batch check:
 - Certificate saving creates PEM format
 - OCSP checks require online access
 - CRL checks may be slow for large lists
+
+---
+
+### 4. Port Scanner (`port-scanner.sh`)
+
+Advanced port scanning utility with service detection and comprehensive scanning options.
+
+#### Features
+
+- Port scanning:
+  - TCP/UDP scanning
+  - Service detection
+  - Port range support
+  - Multi-threading
+- Advanced features:
+  - Batch scanning
+  - Port exclusion
+  - Custom timeouts
+  - Multiple output formats
+- Performance options:
+  - Thread control
+  - Timeout settings
+  - Scan optimization
+- Detailed reporting
+
+#### Installation
+
+1. Ensure the script has executable permissions:
+```bash
+chmod +x port-scanner.sh
+```
+
+2. Install required dependencies:
+```bash
+# For Debian/Ubuntu
+sudo apt-get install netcat-openbsd nmap parallel
+
+# For RHEL/CentOS
+sudo yum install nmap nc parallel
+```
+
+#### Usage
+
+```bash
+./port-scanner.sh [OPTIONS] TARGET
+```
+
+##### Options
+
+- `-p, --ports RANGE`     Port range (default: 1-1024)
+- `-t, --timeout SEC`     Connection timeout (default: 1)
+- `-T, --threads NUM`     Number of threads (default: 10)
+- `-f, --format FORMAT`   Output format (text|json|csv)
+- `-s, --service`        Enable service detection
+- `-o, --output FILE`    Save results to file
+- `-x, --exclude PORTS`   Exclude specific ports
+- `-b, --batch FILE`     Batch scan from file
+- `-u, --udp`           Include UDP scan
+- `-v, --verbose`        Verbose output
+- `-h, --help`           Show this help message
+
+##### Examples
+
+```bash
+# Basic scan of common ports
+./port-scanner.sh example.com
+
+# Full range scan with service detection
+./port-scanner.sh -p 1-65535 -s example.com
+
+# Fast scan with custom threads
+./port-scanner.sh -T 50 -t 0.5 example.com
+
+# Exclude specific ports
+./port-scanner.sh -x "21,22,80" example.com
+
+# Batch scanning with UDP
+./port-scanner.sh -b targets.txt -u
+```
+
+#### Output Formats
+
+##### Text (default)
+```
+Host                 Port   Status  Service
+----------------------------------------
+example.com         80     open    HTTP
+example.com         443    open    HTTPS
+```
+
+##### JSON
+```json
+{
+  "host": "example.com",
+  "port": 80,
+  "status": "open",
+  "service": "HTTP"
+}
+```
+
+##### CSV
+```
+example.com,80,open,HTTP
+example.com,443,open,HTTPS
+```
+
+#### Logs
+
+- All operations logged to `~/.port-scanner-YYYYMMDD.log`
+- Timestamps for all scans
+- Port status details
+- Error messages
+
+#### Dependencies
+
+##### Required
+- netcat (nc)
+- nmap
+- parallel
+- basic Unix utilities
+
+#### Notes
+
+- Some scans require root privileges
+- UDP scanning may be slower
+- Service detection adds scan time
+- Batch processing supports comments (#)
+- Thread count affects system load
+- Some firewalls may block scans
+
+### 5. DNS Utilities (`dns-utils.sh`)
+
+Comprehensive DNS lookup and analysis toolkit with advanced query capabilities.
+
+#### Features
+
+- DNS queries:
+  - Multiple record types
+  - Reverse lookups
+  - Zone transfers
+  - DNS tracing
+- Advanced features:
+  - Batch processing
+  - Custom DNS servers
+  - WHOIS integration
+  - Multiple output formats
+- Query options:
+  - Record type selection
+  - Server selection
+  - Trace resolution
+  - Zone transfer attempts
+- Detailed reporting
+
+#### Installation
+
+1. Ensure the script has executable permissions:
+```bash
+chmod +x dns-utils.sh
+```
+
+2. Install required dependencies:
+```bash
+# For Debian/Ubuntu
+sudo apt-get install dnsutils whois
+
+# For RHEL/CentOS
+sudo yum install bind-utils whois
+```
+
+#### Usage
+
+```bash
+./dns-utils.sh [OPTIONS] DOMAIN
+```
+
+##### Options
+
+- `-t, --type TYPE`       Record type (A|AAAA|MX|NS|TXT|SOA|ANY)
+- `-s, --server DNS`      Specific DNS server
+- `-f, --format FORMAT`   Output format (text|json|csv)
+- `-o, --output FILE`     Save results to file
+- `-a, --all`            Check all record types
+- `-r, --reverse`        Reverse DNS lookup
+- `-T, --trace`          Trace DNS resolution
+- `-z, --zone`           Attempt zone transfer
+- `-b, --batch FILE`     Batch process domains from file
+- `-v, --verbose`        Verbose output
+- `-h, --help`           Show this help message
+
+##### Examples
+
+```bash
+# Basic DNS lookup
+./dns-utils.sh example.com
+
+# Check all record types
+./dns-utils.sh -a example.com
+
+# Use specific DNS server
+./dns-utils.sh -s 8.8.8.8 -t MX example.com
+
+# Reverse DNS lookup
+./dns-utils.sh -r 8.8.8.8
+
+# Trace DNS resolution
+./dns-utils.sh -T example.com
+
+# Batch processing with all records
+./dns-utils.sh -b domains.txt -a
+```
+
+#### Output Formats
+
+##### Text (default)
+```
+Domain                          Type   Result
+------------------------------------------------
+example.com                     A      93.184.216.34
+example.com                     MX     10 mail.example.com
+```
+
+##### JSON
+```json
+{
+  "domain": "example.com",
+  "type": "A",
+  "result": "93.184.216.34"
+}
+```
+
+##### CSV
+```
+example.com,A,93.184.216.34
+example.com,MX,10 mail.example.com
+```
+
+#### Logs
+
+- All operations logged to `~/.dns-utils-YYYYMMDD.log`
+- Timestamps for all queries
+- Query results
+- Error messages
+
+#### Dependencies
+
+##### Required
+- dig (dnsutils)
+- host
+- nslookup
+- whois
+
+#### Notes
+
+- Zone transfers may be restricted
+- Some queries require root privileges
+- WHOIS rate limits may apply
+- Batch processing supports comments (#)
+- Custom DNS servers may have restrictions
+- Some record types may be filtered
