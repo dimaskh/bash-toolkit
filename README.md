@@ -34,30 +34,71 @@ export PATH="$PATH:/path/to/bash-toolkit/scripts"
 bash-toolkit/
 ├── README.md
 ├── scripts/
-│   ├── system-info/
-│   │   ├── system-info.sh
-│   │   └── README.md
-│   ├── backup/
-│   │   ├── backup.sh
-│   │   └── README.md
-│   ├── cleanup/
-│   │   ├── cleanup.sh
-│   │   └── README.md
-│   ├── monitor/
-│   │   ├── monitor.sh
-│   │   └── README.md
-│   └── update-system/
-│       ├── update-system.sh
-│       └── README.md
+    ├── disk-analyzer/
+    │   ├── disk-analyzer.sh
+    │   └── README.md
+    ├── log-manager/
+    │   ├── log-manager.sh
+    │   └── README.md
 ```
 
 ## Available Scripts
 
-1. `system-info/system-info.sh` - Display system information including OS, memory, disk usage
-2. `backup/backup.sh` - Create compressed backups of specified directories
-3. `cleanup/cleanup.sh` - Clean temporary files and cached data
-4. `monitor/monitor.sh` - Monitor system resources in real-time
-5. `update-system/update-system.sh` - Update system packages (supports both MacOS and Arch Linux)
+### System Tools
+
+#### [Disk Analyzer](scripts/disk-analyzer/README.md)
+A comprehensive disk space analyzer and cleanup utility that helps identify large files and directories, and optionally cleans up temporary files.
+
+#### [Log Manager](scripts/log-manager/README.md)
+An advanced log rotation and cleanup utility that helps manage system and application logs efficiently.
+
+## Upcoming Scripts
+
+### System Maintenance
+- System update automation
+- Service status monitor
+
+### Development Tools
+- Git repository bulk operations
+- Docker container cleanup
+- Development environment setup
+- Project dependency checker
+
+### Network Tools
+- Network connectivity tester
+- Port scanner
+- DNS lookup utilities
+- SSL certificate monitor
+
+### Security Scripts
+- File permission auditor
+- SSH key management
+- Failed login attempts monitor
+- Security updates checker
+
+### Backup and Recovery
+- Incremental backup script
+- Database backup automation
+- Config files backup
+- Restore point creator
+
+### Performance Monitoring
+- CPU usage monitor
+- Memory usage tracker
+- Process resource usage analyzer
+- I/O operations monitor
+
+### File Management
+- Duplicate file finder
+- Large file locator
+- File organization by type
+- Bulk file renamer
+
+### Development Workflow
+- Project scaffolding generator
+- Local development environment setup
+- Code formatting checker
+- Build and deployment automator
 
 ## Usage
 
