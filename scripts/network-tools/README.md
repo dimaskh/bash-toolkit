@@ -314,3 +314,159 @@ sudo yum install bc nethogs iftop
 - Process monitoring requires sudo access
 - Historical data requires logging enabled
 - Interface must be active for monitoring
+
+---
+
+### 3. SSL Certificate Checker (`ssl-checker.sh`)
+
+Advanced SSL certificate monitoring and analysis tool with comprehensive certificate management capabilities.
+
+#### Features
+
+- Certificate analysis:
+  - Expiration monitoring
+  - Chain verification
+  - Protocol support
+  - Cipher suites
+- Security checks:
+  - CRL verification
+  - OCSP status
+  - Chain validation
+- Advanced features:
+  - Batch processing
+  - Email notifications
+  - Certificate saving
+  - Multiple output formats
+- Detailed reporting
+- Historical tracking
+
+#### Installation
+
+1. Ensure the script has executable permissions:
+```bash
+chmod +x ssl-checker.sh
+```
+
+2. Install required dependencies:
+```bash
+# For Debian/Ubuntu
+sudo apt-get install openssl curl jq bc
+
+# For RHEL/CentOS
+sudo yum install openssl curl jq bc
+```
+
+#### Usage
+
+```bash
+./ssl-checker.sh [OPTIONS] DOMAIN
+```
+
+##### Options
+
+- `-p, --port PORT`        Port number (default: 443)
+- `-w, --warning DAYS`     Days before expiry warning (default: 30)
+- `-f, --format FORMAT`    Output format (text|json|csv)
+- `-c, --chain`           Check certificate chain
+- `-P, --protocols`       Check supported protocols
+- `-C, --ciphers`         Check supported ciphers
+- `-e, --email ADDRESS`    Email for alerts
+- `-s, --save`            Save certificate to file
+- `-r, --crl`             Check Certificate Revocation List
+- `-o, --ocsp`            Check OCSP status
+- `-b, --batch FILE`      Batch process domains from file
+- `-v, --verbose`         Verbose output
+- `-h, --help`            Show this help message
+
+##### Examples
+
+```bash
+# Basic certificate check
+./ssl-checker.sh example.com
+
+# Full security analysis
+./ssl-checker.sh -c -P -C -r -o example.com
+
+# Batch processing with email alerts
+./ssl-checker.sh -b domains.txt -e admin@example.com
+
+# Save certificates with custom warning
+./ssl-checker.sh -s -w 60 example.com
+
+# Check with JSON output
+./ssl-checker.sh -f json example.com
+```
+
+#### Output Formats
+
+##### Text (default)
+```
+Domain: example.com
+Expiry: Jan 14 12:00:00 2026 GMT
+Days Left: 365
+Issuer: CN=Let's Encrypt Authority X3
+Subject: CN=example.com
+```
+
+##### JSON
+```json
+{
+  "domain": "example.com",
+  "expiry": "Jan 14 12:00:00 2026 GMT",
+  "days_left": 365,
+  "issuer": "CN=Let's Encrypt Authority X3",
+  "subject": "CN=example.com"
+}
+```
+
+##### CSV
+```
+example.com,Jan 14 12:00:00 2026 GMT,365,CN=Let's Encrypt Authority X3,CN=example.com
+```
+
+#### Batch Processing
+
+Create a text file with domains:
+```
+example.com
+subdomain.example.com
+another-domain.com
+```
+
+Run batch check:
+```bash
+./ssl-checker.sh -b domains.txt
+```
+
+#### Alerts
+
+- Expiration warnings
+- Chain validation errors
+- Protocol vulnerabilities
+- Revocation status
+- Email notifications
+
+#### Logs
+
+- All operations logged to `~/.ssl-checker-YYYYMMDD.log`
+- Timestamps for all checks
+- Certificate details
+- Error messages
+
+#### Dependencies
+
+##### Required
+- openssl
+- curl
+- jq (for JSON output)
+- bc (for calculations)
+- mailutils (for email alerts)
+
+#### Notes
+
+- Some checks require root privileges
+- Email alerts require configured mail system
+- Batch processing supports comments (#)
+- Certificate saving creates PEM format
+- OCSP checks require online access
+- CRL checks may be slow for large lists
