@@ -1,4 +1,10 @@
-# Network Connectivity Tester Script
+# Network Tools
+
+A collection of scripts for network diagnostics, monitoring, and troubleshooting.
+
+## Scripts
+
+### 1. Network Connectivity Tester (`network-tester.sh`)
 
 An advanced network diagnostic tool for testing connectivity, monitoring network performance, and troubleshooting network issues.
 
@@ -174,3 +180,137 @@ sudo yum install nc bind-utils traceroute curl jq mailx
 - Port scan checks common service ports
 - Full diagnostics may take longer to complete
 - Log files rotate daily
+
+---
+
+### 2. Bandwidth Monitor (`bandwidth-monitor.sh`)
+
+Real-time network bandwidth monitoring and analysis tool with advanced visualization and alerting capabilities.
+
+#### Features
+
+- Real-time monitoring:
+  - Download/Upload speeds
+  - Data transfer rates
+  - Interface statistics
+- Multiple display units (B, KB, MB, GB)
+- Visualization:
+  - ASCII graphs
+  - Historical data
+  - Process-specific usage
+- Advanced features:
+  - Threshold alerts
+  - Email notifications
+  - Data logging
+  - Multiple output formats
+- Process monitoring
+- Historical analysis
+
+#### Installation
+
+1. Ensure the script has executable permissions:
+```bash
+chmod +x bandwidth-monitor.sh
+```
+
+2. Install required dependencies:
+```bash
+# For Debian/Ubuntu
+sudo apt-get install bc nethogs iftop
+
+# For RHEL/CentOS
+sudo yum install bc nethogs iftop
+```
+
+#### Usage
+
+```bash
+./bandwidth-monitor.sh [OPTIONS]
+```
+
+##### Options
+
+- `-i, --interface IF`     Network interface to monitor
+- `-n, --interval SEC`     Update interval in seconds (default: 1)
+- `-u, --unit UNIT`        Display unit (B|KB|MB|GB)
+- `-f, --format FORMAT`    Output format (text|json|csv)
+- `-t, --threshold VAL`    Alert threshold (in specified unit)
+- `-e, --email ADDRESS`    Email for alerts
+- `-l, --log`             Log data to file
+- `-g, --graph`           Show ASCII graph
+- `-p, --processes`       Show top bandwidth processes
+- `-H, --history`         Show historical data
+- `-v, --verbose`         Verbose output
+- `-h, --help`            Show this help message
+
+##### Examples
+
+```bash
+# Monitor eth0 interface with ASCII graph
+./bandwidth-monitor.sh -i eth0 -g
+
+# Monitor with process tracking and MB units
+./bandwidth-monitor.sh -i wlan0 -u MB -p
+
+# Monitor with threshold alerts
+./bandwidth-monitor.sh -i eth0 -t 100 -e admin@example.com
+
+# Monitor with logging and CSV output
+./bandwidth-monitor.sh -i eth0 -l -f csv
+
+# Show historical data with graphs
+./bandwidth-monitor.sh -i eth0 -H -g
+```
+
+#### Output Formats
+
+##### Text (default)
+```
+2025-01-14 12:10:15 - RX: 2.45 MB/s | TX: 1.23 MB/s
+```
+
+##### JSON
+```json
+{
+  "timestamp": "2025-01-14 12:10:15",
+  "rx_speed": 2.45,
+  "tx_speed": 1.23,
+  "unit": "MB"
+}
+```
+
+##### CSV
+```
+2025-01-14 12:10:15,2.45,1.23,MB
+```
+
+#### Alerts
+
+- Threshold-based alerts
+- Email notifications
+- Configurable thresholds
+- Custom alert messages
+
+#### Logs
+
+- All data logged to `~/.bandwidth-monitor-YYYYMMDD.log`
+- Timestamps for all entries
+- Speed measurements
+- Alert events
+
+#### Dependencies
+
+##### Required
+- bc (basic calculator)
+- nethogs (process bandwidth monitoring)
+- iftop (network monitoring)
+- mailutils (for email alerts)
+
+#### Notes
+
+- Some features require root privileges
+- Email alerts require configured mail system
+- Graphs work best in ANSI-compatible terminals
+- Process monitoring requires sudo access
+- Historical data requires logging enabled
+- Interface must be active for monitoring
